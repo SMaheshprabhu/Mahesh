@@ -1,84 +1,60 @@
 package com.example.demo;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Clients")
 public class Client {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "Name", length = 20)
-    private String name; 
+    private String name;
 
     @Column(name = "Age")
     private int age;
 
     @Column(name = "Gender", length = 1)
     private String gender;
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "Balnce")
-    @Column(name = "Balance")   
-    private long balance;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "balance_id")
+    private Balance balance;
 
     public Client() {}
 
-    public Client(String name, int age, String gender, long balance) {
-        
+    public Client(String name, int age, String gender, long balanceValue) {
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.balance = balance;
+        this.balance = new Balance(balanceValue);
     }
 
-    public Integer getId() {
-        return id;
-    }
+   
+    public Integer getId() 
+    { return id; }
+    public void setId(Integer id)
+     { this.id = id; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
-    
+    public String getName()
+     { return name; }
+    public void setName(String name) 
+    { this.name = name; }
 
-    public String getName() {
-        return name;
-    }
+    public int getAge()
+     { return age; }
+    public void setAge(int age)
+     { this.age = age; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getGender() 
+    { return gender; }
+    public void setGender(String gender) 
+    { this.gender = gender; }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public long getBalance() {
-        return balance;
-    }
-
-    public void setBalance(long balance) {
-        this.balance = balance;
-    }
+    public Balance getBalance()
+     { return balance; }
+    public void setBalance(Balance balance) 
+    { this.balance = balance; }
 }
